@@ -1,0 +1,28 @@
+#Code für 12
+
+
+# Herzfrequenzwerte (simuliert oder gemessen)
+time = np.arange(0, 30, 3)  # Zeit in Minuten
+HR_rest = 60  # Ruheherzfrequenz in bpm
+HR_max = 180  # Maximale Herzfrequenz in bpm
+HR = np.linspace(HR_rest + 10, HR_max - 30, len(time))  # Simulierte Herzfrequenzwerte
+
+# Berechnung der Herzfrequenzreserve (HRR)
+HRR = 100 * (HR - HR_rest) / (HR_max - HR_rest)
+
+# Berechnung des Energieverbrauchs (EE) mit Formel 2
+EE = 1.01 * HRR + 1.08
+
+# Plotten der Ergebnisse
+plt.figure(figsize=(8, 5))
+plt.plot(time, EE, 'o-', color='orange', label='Metabolischer Energieverbrauch')
+plt.title('Metabolischer Energieverbrauch über die Zeit')
+plt.xlabel('Zeit (Minuten)')
+plt.ylabel('Energieverbrauch (kcal/min)')
+plt.grid(True)
+plt.legend()
+plt.show()
+
+# Ausgabe der relativen Änderung des Energieverbrauchs
+EE_relative_change = (EE[-1] - EE[0]) / EE[0] * 100
+print(f"Der relative Anstieg des metabolischen Energieverbrauchs beträgt: {EE_relative_change:.2f} %")
