@@ -1,7 +1,7 @@
 #Code für 12 eigene Werte müssen hinzugefügt werden
 #Haben und für formel 3 entschieden obwohl die formel 2 genauer wäre da wir aber 
 #nur die Ruheherzfrequenz und die Aktivitätsherzfrequenz haben haben wir uns für formel 3 entschieden
-#da die genauigkeit der formel 2 dannn nicht  gegeben ist wenn wir diese faustformel anwenden würden für die maximale herzfreuqenz
+#da die Genauigkeit der formel 2 dann nicht  gegeben ist wenn wir diese faustformel anwenden würden für die maximale herzfreuqenz
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -36,3 +36,6 @@ plt.title("Metabolischer Energieverbrauch über die Zeit")
 plt.grid()
 plt.legend()
 plt.show()
+#Die relative Änderung des Energieverbrauchs macht Sinn, 
+#da der metabolische Energieverbrauch bei steigender Herzfrequenz progressiv zunimmt.
+#  Dies spiegelt die zunehmende Belastung im Experiment wider
