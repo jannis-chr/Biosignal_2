@@ -1,28 +1,38 @@
-#Code für 12
+#Code für 12 eigene Werte müssen hinzugefügt werden
+#Haben und für formel 3 entschieden obwohl die formel 2 genauer wäre da wir aber 
+#nur die Ruheherzfrequenz und die Aktivitätsherzfrequenz haben haben wir uns für formel 3 entschieden
+#da die genauigkeit der formel 2 dannn nicht  gegeben ist wenn wir diese faustformel anwenden würden für die maximale herzfreuqenz
+import numpy as np
+import matplotlib.pyplot as plt
 
-
-# Herzfrequenzwerte (simuliert oder gemessen)
-time = np.arange(0, 30, 3)  # Zeit in Minuten
+# Simulierte Herzfrequenzwerte und Zeit
+time = np.arange(0, 30, 5)  # Zeit in Minuten (0, 5, 10, ..., 25)
 HR_rest = 60  # Ruheherzfrequenz in bpm
-HR_max = 180  # Maximale Herzfrequenz in bpm
-HR = np.linspace(HR_rest + 10, HR_max - 30, len(time))  # Simulierte Herzfrequenzwerte
+HR_activity = np.array([70, 90, 110, 130, 150, 170])  # Aktivitäts-Herzfrequenzen in bpm
 
-# Berechnung der Herzfrequenzreserve (HRR)
-HRR = 100 * (HR - HR_rest) / (HR_max - HR_rest)
+# Berechnung von HRnet
+HRnet = HR_activity - HR_rest
 
-# Berechnung des Energieverbrauchs (EE) mit Formel 2
-EE = 1.01 * HRR + 1.08
+# Berechnung des Energieverbrauchs (EE) mit Formel 3
+EE = 1.08 * HRnet  # EE in kcal/min
 
-# Plotten der Ergebnisse
+# Berechnung des gesamten Energieverbrauchs über die Zeit
+total_energy_kcal = np.trapz(EE, time)  # Integration über die Zeit
+
+# Berechnung der relativen Änderung des Energieverbrauchs (prozentual)
+relative_change_EE = (EE[-1] - EE[0]) / EE[0] * 100  # Änderung von Start zu Ende
+
+# Ergebnisse ausgeben
+print(f"Metabolischer Energieverbrauch über die Zeit: {EE} kcal/min")
+print(f"Gesamter Energieverbrauch (integriert): {total_energy_kcal:.2f} kcal")
+print(f"Relative Änderung des Energieverbrauchs: {relative_change_EE:.2f} %")
+
+# Plot zur Visualisierung
 plt.figure(figsize=(8, 5))
-plt.plot(time, EE, 'o-', color='orange', label='Metabolischer Energieverbrauch')
-plt.title('Metabolischer Energieverbrauch über die Zeit')
-plt.xlabel('Zeit (Minuten)')
-plt.ylabel('Energieverbrauch (kcal/min)')
-plt.grid(True)
+plt.plot(time, EE, marker="o", label="Metabolischer Energieverbrauch (EE)")
+plt.xlabel("Zeit (min)")
+plt.ylabel("Energieverbrauch (kcal/min)")
+plt.title("Metabolischer Energieverbrauch über die Zeit")
+plt.grid()
 plt.legend()
 plt.show()
-
-# Ausgabe der relativen Änderung des Energieverbrauchs
-EE_relative_change = (EE[-1] - EE[0]) / EE[0] * 100
-print(f"Der relative Anstieg des metabolischen Energieverbrauchs beträgt: {EE_relative_change:.2f} %")
