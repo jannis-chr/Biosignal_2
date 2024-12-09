@@ -10,11 +10,11 @@ HR_activity = np.linspace(HR_rest + 10, HR_max - 30, len(time))  # Simulierte He
 # Berechnung von HRnet
 HRnet = HR_activity - HR_rest
 
-# Berechnung des Energieverbrauchs (EE) mit Formel 3
-EE = 1.08 * HRnet  # EE in kcal/min
+# Berechnung des Energieverbrauchs (EE) mit Formel 3 / Körpergewicht und Geschecht in die Formel einfügen
+EE = 1.08 * HRnet  # EE in kcal/min / wir haben für jede 2ml eien HR wert Achtung das wir richtig rechnen
 
 # Integration des gesamten Energieverbrauchs über die Zeit (in Minuten)
-total_energy_kcal = np.trapz(EE, time)
+total_energy_kcal = np.trapz(EE, time) #wir haben für jede 2ml eien HR wert Achtung das wir richtig rechnen
 
 # Umrechnung in verschiedene Einheiten
 total_energy_joule = total_energy_kcal * 4184  # Joule
